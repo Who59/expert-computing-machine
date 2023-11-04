@@ -1,12 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise!</title>
-</head>
-<body>
-    <h1 style="text-align: center; margin-top: 50px;">Surprise! 🎉</h1>
-    <p style="text-align: center; font-size: 20px;">Thanks for visiting!</p>
-</body>
-</html>
+import os
+from datetime import datetime
+
+def create_journal_entry():
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    entry = input("Write your journal entry:\n")
+    
+    with open("wellness_journal.txt", "a") as file:
+        file.write(f"{timestamp}\n{entry}\n\n")
+    print("Journal entry added successfully!")
+
+def view_journal_entries():
+    if os.path.exists("wellness_journal.txt"):
+        with open("wellness_journal.txt", "r") as file:
+            entries = file.read()
+            print("\n--- Wellness Journal Entries ---\n")
+            print(entries)
+    else:
+        print("No journal entries found.")
+
+# Sample usage
+create_journal_entry()
+view_journal_entries()
